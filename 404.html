@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Redirecting...</title>
+<script type="text/javascript">
+    function redirect() {
+        var path = window.location.pathname;
+        var encodedUrl = path.substring(1);
+
+        if (encodedUrl) {
+            try {
+                var targetUrl = atob(encodedUrl);
+                window.location.replace(targetUrl);
+            } catch (e) {
+                document.body.innerText = "잘못된 경로입니다.";
+            }
+        } else {
+            document.body.innerText = "리디렉션 서비스입니다. 주소 뒤에 Base64로 인코딩된 URL을 붙여주세요.";
+        }
+    }
+    redirect();
+</script>
+</head>
+<body>
+    <p>잠시만 기다려주세요...</p>
+</body>
+</html>
