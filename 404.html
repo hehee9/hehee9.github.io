@@ -3,25 +3,18 @@
 <head>
 <title>Redirecting...</title>
 <script type="text/javascript">
-    function redirect() {
+    (function() {
         var path = window.location.pathname;
-        var encodedUrl = path.substring(1);
-
-        if (encodedUrl) {
-            try {
-                var targetUrl = atob(encodedUrl);
-                window.location.replace(targetUrl);
-            } catch (e) {
-                document.body.innerText = "잘못된 경로입니다.";
-            }
+        var targetUrl = path.substring(1);
+        if (targetUrl && (targetUrl.startsWith('http://') || targetUrl.startsWith('https://'))) {
+            window.location.replace(targetUrl);
         } else {
-            document.body.innerText = "리디렉션 서비스입니다. 주소 뒤에 Base64로 인코딩된 URL을 붙여주세요.";
+            document.body.innerHTML = "<h1>이동할 주소가 올바르지 않습니다.</h1><p>사용법: " + window.location.origin + "/이동할전체URL</p>";
         }
-    }
-    redirect();
+    })();
 </script>
 </head>
 <body>
-    <p>잠시만 기다려주세요...</p>
+    <p>잠시만 기다려주세요, 목적지로 이동 중입니다...</p>
 </body>
 </html>
